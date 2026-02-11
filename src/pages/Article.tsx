@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { articles, type ArticleSection } from '../data/articles'
-import { systemLifecycleSteps, type LifecycleStepId } from '../data/systemLifecycle'
+import { systemLifecycleSteps, pocTimelineItems, type LifecycleStepId, type PocTimelineItem } from '../data/systemLifecycle'
 import HighlightableText from '../components/HighlightableText'
 import styles from './Article.module.css'
 import snScreenImg from '../images/sn-screen.png'
@@ -161,6 +161,31 @@ const defaultContent = (
   </div>
 )
 
+function PocVerticalTimeline({ items }: { items: PocTimelineItem[] }) {
+  return (
+    <div className={styles.verticalTimeline} aria-label="POC considerations and milestones">
+      <h3 className={styles.verticalTimelineTitle}>Considerations and milestones</h3>
+      <ul className={styles.verticalTimelineList}>
+        {items.map((item, index) => (
+          <li
+            key={index}
+            className={
+              item.type === 'milestone'
+                ? styles.verticalTimelineItemMilestone
+                : item.type === 'transition'
+                  ? styles.verticalTimelineItemTransition
+                  : styles.verticalTimelineItemStep
+            }
+          >
+            <span className={styles.verticalTimelineNode} aria-hidden />
+            <span className={styles.verticalTimelineLabel}>{item.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
 function SystemLifecycleContent() {
   const [selectedStep, setSelectedStep] = useState<LifecycleStepId>('poc')
   const step = systemLifecycleSteps.find((s) => s.id === selectedStep) ?? systemLifecycleSteps[0]
@@ -192,6 +217,9 @@ function SystemLifecycleContent() {
             <li key={i}>{criterion}</li>
           ))}
         </ul>
+        {step.id === 'poc' && (
+          <PocVerticalTimeline items={pocTimelineItems} />
+        )}
       </div>
     </div>
   )

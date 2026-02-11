@@ -217,6 +217,88 @@
   margin-bottom: 0;
 }
 
+/* POC vertical timeline */
+.verticalTimeline {
+  margin-top: 32px;
+  padding-left: 0;
+}
+
+.verticalTimelineTitle {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--grey-600);
+  margin: 0 0 20px 0;
+}
+
+.verticalTimelineList {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 20px;
+  border-left: 2px solid var(--grey-200);
+  position: relative;
+}
+
+.verticalTimelineList li {
+  position: relative;
+  padding-left: 24px;
+  padding-bottom: 20px;
+  margin-bottom: 0;
+}
+
+.verticalTimelineList li:last-child {
+  padding-bottom: 0;
+}
+
+.verticalTimelineNode {
+  position: absolute;
+  left: -20px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  border-radius: 50%;
+  background: var(--grey-300);
+  border: 2px solid var(--white);
+  box-shadow: 0 0 0 1px var(--grey-200);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.verticalTimelineItemMilestone .verticalTimelineNode {
+  background: var(--primary-purple);
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  top: 5px;
+}
+
+.verticalTimelineItemTransition .verticalTimelineNode {
+  background: var(--primary-purple);
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  top: 4px;
+  box-shadow: 0 0 0 2px var(--primary-purple-light);
+}
+
+.verticalTimelineLabel {
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--grey-600);
+  display: block;
+}
+
+.verticalTimelineItemMilestone .verticalTimelineLabel {
+  font-weight: 600;
+  color: var(--grey-600);
+}
+
+.verticalTimelineItemTransition .verticalTimelineLabel {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--primary-purple);
+}
+
 /* Invite users – image with pulsing hotspots */
 .inviteImageWrap {
   position: relative;

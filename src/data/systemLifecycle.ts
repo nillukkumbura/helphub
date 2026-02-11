@@ -6,6 +6,25 @@ export interface LifecycleStep {
   criteria: string[]
 }
 
+export type PocTimelineItemType = 'step' | 'milestone' | 'transition'
+
+export interface PocTimelineItem {
+  type: PocTimelineItemType
+  label: string
+}
+
+/** Vertical timeline for POC phase: considerations (steps), milestones, and final transition to POV. */
+export const pocTimelineItems: PocTimelineItem[] = [
+  { type: 'step', label: 'Get approval from CIO to proceed with POC' },
+  { type: 'milestone', label: 'Budget approved' },
+  { type: 'step', label: 'Document scope, objectives, and success criteria' },
+  { type: 'step', label: 'Confirm use of synthetic or sample data (or obtain pre-approval for production data)' },
+  { type: 'milestone', label: 'Security review passed (if internet-facing or sensitive data)' },
+  { type: 'step', label: 'Register system in ATAS when ready to move beyond POC' },
+  { type: 'milestone', label: 'POC evaluation complete; success criteria met' },
+  { type: 'transition', label: 'System is ready to transition to POV' },
+]
+
 export const systemLifecycleSteps: LifecycleStep[] = [
   {
     id: 'poc',
