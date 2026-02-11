@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { articles } from '../data/articles'
+import { articles, type ArticleSection } from '../data/articles'
 import { systemLifecycleSteps, type LifecycleStepId } from '../data/systemLifecycle'
 import HighlightableText from '../components/HighlightableText'
 import styles from './Article.module.css'
@@ -61,6 +61,28 @@ const getAccessContent = (
   </div>
 )
 
+function SectionsContent({ sections }: { sections: ArticleSection[] }) {
+  return (
+    <div className={styles.articleBody}>
+      {sections.map((section) => (
+        <section key={section.id} id={section.id}>
+          {section.title ? <h2>{section.title}</h2> : null}
+          {section.paragraphs.map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+          {section.bullets && section.bullets.length > 0 ? (
+            <ul>
+              {section.bullets.map((b, i) => (
+                <li key={i}>{b}</li>
+              ))}
+            </ul>
+          ) : null}
+        </section>
+      ))}
+    </div>
+  )
+}
+
 const defaultContent = (
   <div className={styles.articleBody}>
     <p>This article provides guidance and steps specific to this topic. Content can be expanded here.</p>
@@ -106,7 +128,14 @@ function SystemLifecycleContent() {
 export default function Article() {
   const { slug } = useParams<{ slug: string }>()
   const article = slug ? articles.find((a) => a.slug === slug) : null
-  const headings = article?.slug === 'system-lifecycle' ? [] : (article?.headings ?? [])
+  const headings =
+    article?.slug === 'system-lifecycle'
+      ? []
+      : article?.headings?.length
+        ? article.headings
+        : (article?.sections ?? [])
+            .filter((s) => s.title)
+            .map((s) => ({ id: s.id, text: s.title }))
   const firstHeadingId = headings[0]?.id ?? null
   const [activeHeadingId, setActiveHeadingId] = useState<string | null>(firstHeadingId)
 
@@ -154,7 +183,9 @@ export default function Article() {
       ? getAccessContent
       : article.slug === 'system-lifecycle'
         ? <SystemLifecycleContent />
-        : defaultContent
+        : article.sections?.length
+          ? <SectionsContent sections={article.sections} />
+          : defaultContent
 
   const handleTocClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault()
