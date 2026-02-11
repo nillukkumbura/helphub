@@ -216,3 +216,146 @@
 .criteriaList li:last-child {
   margin-bottom: 0;
 }
+
+/* Invite users – image with pulsing hotspots */
+.inviteImageWrap {
+  position: relative;
+  display: inline-block;
+  margin-top: 24px;
+  max-width: 100%;
+}
+
+.inviteImage {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+}
+
+.pulseIndicator {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  margin-left: 0;
+  margin-top: 0;
+  transform: translate(-50%, -50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 2;
+  border-radius: 50%;
+  padding: 0;
+  transition: transform 0.2s ease;
+}
+
+.pulseIndicator:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.pulseIndicator:focus {
+  outline: 2px solid var(--primary-purple);
+  outline-offset: 2px;
+}
+
+.pulseRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--primary-purple);
+  opacity: 0.7;
+  animation: hotspotPulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.pulseDot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  margin-top: -6px;
+  background: var(--primary-purple);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--white);
+  pointer-events: none;
+}
+
+@keyframes hotspotPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.hotspotPopover {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  top: calc(100% + 12px);
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--grey-200);
+  padding: 16px;
+  padding-top: 36px;
+  max-width: 280px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.hotspotPopoverOpen {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  pointer-events: auto;
+}
+
+.hotspotPopoverClosed {
+  opacity: 0;
+  transform: translateX(-50%) scale(0.96);
+  pointer-events: none;
+}
+
+.hotspotPopoverTitle {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--grey-600);
+  margin: 0 0 8px 0;
+}
+
+.hotspotPopoverBody {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--grey-600);
+  margin: 0;
+}
+
+.hotspotPopoverClose {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: var(--grey-100);
+  color: var(--grey-600);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.hotspotPopoverClose:hover {
+  background: var(--grey-200);
+  color: var(--primary-purple);
+}

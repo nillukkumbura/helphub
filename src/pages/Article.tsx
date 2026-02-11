@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { articles, type ArticleSection } from '../data/articles'
 import { systemLifecycleSteps, type LifecycleStepId } from '../data/systemLifecycle'
 import HighlightableText from '../components/HighlightableText'
 import styles from './Article.module.css'
+import snScreenImg from '../images/sn-screen.png'
 
 function scrollToHeading(id: string) {
   const el = document.getElementById(id)
@@ -79,6 +80,90 @@ function SectionsContent({ sections }: { sections: ArticleSection[] }) {
           ) : null}
         </section>
       ))}
+    </div>
+  )
+}
+
+const INVITE_HOTSPOTS: { id: string; left: number; top: number; title: string; body: string }[] = [
+  {
+    id: 'invite-button',
+    left: 72,
+    top: 24,
+    title: 'Invite User',
+    body: 'Click here to open the invite dialog. Enter the user’s official email and assign a role (Editor, Viewer, Risk Contributor, or System Owner) before sending the invite.',
+  },
+  {
+    id: 'access-roles',
+    left: 32,
+    top: 56,
+    title: 'Access & Roles',
+    body: 'This section lists users with access to the system. You can manage roles and permissions here. Navigate to it from your system record to invite or revoke access.',
+  },
+]
+
+function InviteUsersContent({ sections }: { sections: ArticleSection[] }) {
+  const [openHotspotId, setOpenHotspotId] = useState<string | null>(null)
+  const imageWrapRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (openHotspotId == null) return
+    const handleClickOutside = (e: MouseEvent) => {
+      if (imageWrapRef.current && !imageWrapRef.current.contains(e.target as Node)) {
+        setOpenHotspotId(null)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [openHotspotId])
+
+  return (
+    <div className={styles.articleBody}>
+      <SectionsContent sections={sections} />
+      <div className={styles.inviteImageWrap} ref={imageWrapRef}>
+        <img
+          src={snScreenImg}
+          alt="Invite users screen showing Access & Roles and invite options"
+          className={styles.inviteImage}
+        />
+        {INVITE_HOTSPOTS.map((hotspot) => (
+          <div
+            key={hotspot.id}
+            style={{
+              position: 'absolute',
+              left: `${hotspot.left}%`,
+              top: `${hotspot.top}%`,
+            }}
+          >
+            <button
+              type="button"
+              className={styles.pulseIndicator}
+              onClick={() => setOpenHotspotId((prev) => (prev === hotspot.id ? null : hotspot.id))}
+              aria-expanded={openHotspotId === hotspot.id}
+              aria-haspopup="dialog"
+              aria-label={`Learn about ${hotspot.title}`}
+            >
+              <span className={styles.pulseRing} aria-hidden />
+              <span className={styles.pulseDot} aria-hidden />
+            </button>
+            <div
+              className={`${styles.hotspotPopover} ${openHotspotId === hotspot.id ? styles.hotspotPopoverOpen : styles.hotspotPopoverClosed}`}
+              role="dialog"
+              aria-label={hotspot.title}
+            >
+              <button
+                type="button"
+                className={styles.hotspotPopoverClose}
+                onClick={() => setOpenHotspotId(null)}
+                aria-label="Close"
+              >
+                ×
+              </button>
+              <h3 className={styles.hotspotPopoverTitle}>{hotspot.title}</h3>
+              <p className={styles.hotspotPopoverBody}>{hotspot.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
@@ -183,9 +268,11 @@ export default function Article() {
       ? getAccessContent
       : article.slug === 'system-lifecycle'
         ? <SystemLifecycleContent />
-        : article.sections?.length
-          ? <SectionsContent sections={article.sections} />
-          : defaultContent
+        : article.slug === 'invite-users' && article.sections?.length
+          ? <InviteUsersContent sections={article.sections} />
+          : article.sections?.length
+            ? <SectionsContent sections={article.sections} />
+            : defaultContent
 
   const handleTocClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault()
