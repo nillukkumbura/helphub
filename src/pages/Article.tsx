@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { articles, type ArticleSection } from '../data/articles'
 import { systemLifecycleSteps, type LifecycleStepId } from '../data/systemLifecycle'
@@ -103,23 +103,11 @@ const INVITE_HOTSPOTS: { id: string; left: number; top: number; title: string; b
 
 function InviteUsersContent({ sections }: { sections: ArticleSection[] }) {
   const [openHotspotId, setOpenHotspotId] = useState<string | null>(null)
-  const imageWrapRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (openHotspotId == null) return
-    const handleClickOutside = (e: MouseEvent) => {
-      if (imageWrapRef.current && !imageWrapRef.current.contains(e.target as Node)) {
-        setOpenHotspotId(null)
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [openHotspotId])
 
   return (
     <div className={styles.articleBody}>
       <SectionsContent sections={sections} />
-      <div className={styles.inviteImageWrap} ref={imageWrapRef}>
+      <div className={styles.inviteImageWrap}>
         <img
           src={snScreenImg}
           alt="Invite users screen showing Access & Roles and invite options"
@@ -133,31 +121,30 @@ function InviteUsersContent({ sections }: { sections: ArticleSection[] }) {
               left: `${hotspot.left}%`,
               top: `${hotspot.top}%`,
             }}
+            onMouseEnter={() => setOpenHotspotId(hotspot.id)}
+            onMouseLeave={() => setOpenHotspotId(null)}
           >
-            <button
-              type="button"
+            <div
               className={styles.pulseIndicator}
-              onClick={() => setOpenHotspotId((prev) => (prev === hotspot.id ? null : hotspot.id))}
+              role="button"
+              tabIndex={0}
               aria-expanded={openHotspotId === hotspot.id}
-              aria-haspopup="dialog"
               aria-label={`Learn about ${hotspot.title}`}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  setOpenHotspotId((prev) => (prev === hotspot.id ? null : hotspot.id))
+                }
+              }}
             >
               <span className={styles.pulseRing} aria-hidden />
               <span className={styles.pulseDot} aria-hidden />
-            </button>
+            </div>
             <div
               className={`${styles.hotspotPopover} ${openHotspotId === hotspot.id ? styles.hotspotPopoverOpen : styles.hotspotPopoverClosed}`}
-              role="dialog"
+              role="tooltip"
               aria-label={hotspot.title}
             >
-              <button
-                type="button"
-                className={styles.hotspotPopoverClose}
-                onClick={() => setOpenHotspotId(null)}
-                aria-label="Close"
-              >
-                ×
-              </button>
               <h3 className={styles.hotspotPopoverTitle}>{hotspot.title}</h3>
               <p className={styles.hotspotPopoverBody}>{hotspot.body}</p>
             </div>
