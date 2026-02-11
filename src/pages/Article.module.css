@@ -1,0 +1,218 @@
+.page {
+  min-height: 100%;
+}
+
+.articleLayout {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 32px 64px;
+  gap: 48px;
+}
+
+.articleMain {
+  flex: 1;
+  min-width: 0;
+}
+
+.articleTitle {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: var(--grey-600);
+  margin: 0 0 8px 0;
+}
+
+.articleSubtitle {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 32px;
+  color: var(--grey-600);
+  margin: 0 0 32px 0;
+}
+
+.articleBody {
+  font-size: 16px;
+  line-height: 32px;
+  color: var(--grey-600);
+}
+
+.articleBody h2 {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 32px;
+  margin: 32px 0 16px 0;
+  padding-top: 4px;
+  scroll-margin-top: 88px; /* avoid heading hiding behind floating header */
+}
+
+.articleBody h2:first-child {
+  margin-top: 0;
+}
+
+.articleBody p,
+.articleBody ul,
+.articleBody ol {
+  margin: 0 0 16px 0;
+}
+
+.articleBody li {
+  margin-bottom: 8px;
+}
+
+.toc {
+  width: 200px;
+  flex-shrink: 0;
+  align-self: flex-start;
+  border-left: 1px solid var(--grey-200);
+  padding-left: 24px;
+}
+
+.tocSticky {
+  position: sticky;
+  top: 24px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+}
+
+.tocTitle {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--grey-600);
+  margin: 0 0 12px 0;
+}
+
+.tocList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tocList li {
+  margin: 0 0 8px 0;
+}
+
+.tocLink {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--grey-600);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.tocLink:hover {
+  color: var(--primary-purple);
+}
+
+.tocLinkActive {
+  color: var(--primary-purple);
+  font-weight: 600;
+}
+
+.tocLink:focus {
+  outline: 2px solid var(--primary-purple);
+  outline-offset: 2px;
+}
+
+/* System Lifecycle stepper / timeline */
+.lifecycleWrap {
+  margin-top: 8px;
+}
+
+.stepper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 4px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--grey-200);
+  position: relative;
+}
+
+.stepperStep {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--grey-50);
+  border: 1px solid var(--grey-200);
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--grey-600);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.stepperStep:hover {
+  background: var(--grey-100);
+  border-color: var(--grey-300);
+  color: var(--primary-purple);
+}
+
+.stepperStepActive {
+  background: var(--primary-purple-light);
+  border-color: var(--primary-purple);
+  color: var(--primary-purple);
+}
+
+.stepperStepActive:hover {
+  background: var(--primary-purple-light);
+  border-color: var(--primary-purple);
+  color: var(--primary-purple);
+}
+
+.stepperNumber {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  border: 1px solid var(--grey-300);
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+.stepperStepActive .stepperNumber {
+  background: var(--primary-purple);
+  border-color: var(--primary-purple);
+  color: var(--white);
+}
+
+.stepperLabel {
+  white-space: nowrap;
+}
+
+.lifecycleContent {
+  font-size: 16px;
+  line-height: 32px;
+  color: var(--grey-600);
+}
+
+.lifecyclePhaseTitle {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  color: var(--grey-600);
+  margin: 0 0 8px 0;
+}
+
+.lifecyclePhaseDesc {
+  margin: 0 0 20px 0;
+}
+
+.criteriaList {
+  margin: 0;
+  padding-left: 24px;
+}
+
+.criteriaList li {
+  margin-bottom: 12px;
+}
+
+.criteriaList li:last-child {
+  margin-bottom: 0;
+}

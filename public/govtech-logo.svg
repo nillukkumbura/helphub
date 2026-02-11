@@ -1,0 +1,16 @@
+<svg width="200" height="44" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hexagon mark - purple/pink as per Figma -->
+  <path d="M22 2L40 12V32L22 42L4 32V12L22 2Z" fill="url(#gtech)" stroke="url(#gtech)" stroke-width=".5"/>
+  <path d="M22 9L32 14V26L22 31L12 26V14L22 9Z" fill="white" fill-opacity=".95"/>
+  <defs>
+    <linearGradient id="gtech" x1="4" y1="2" x2="40" y2="42" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5925DC"/>
+      <stop offset=".6" stop-color="#7C3AED"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+  </defs>
+  <!-- GOVTECH bold black -->
+  <text x="50" y="20" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700" fill="#000000">GOVTECH</text>
+  <!-- SINGAPORE smaller gray -->
+  <text x="50" y="36" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="400" fill="#98A2B3">SINGAPORE</text>
+</svg>

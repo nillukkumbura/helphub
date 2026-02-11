@@ -1,0 +1,24 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.headerSpacer {
+  height: var(--header-height);
+  flex-shrink: 0;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  background: var(--white);
+  scroll-padding-top: 88px; /* keep headings visible below header when TOC scrolls */
+}

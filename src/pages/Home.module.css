@@ -1,0 +1,217 @@
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 32px 64px;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.heroText {
+  flex: 1;
+  min-width: 280px;
+}
+
+.heroTitle {
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 64px;
+  letter-spacing: 0;
+  color: var(--grey-600);
+  margin: 0 0 16px 0;
+}
+
+.heroTagline {
+  font-size: 16px;
+  line-height: 32px;
+  color: var(--grey-600);
+  margin: 0;
+}
+
+.heroImage {
+  flex-shrink: 0;
+}
+
+.heroImage img {
+  max-width: 100%;
+  height: auto;
+}
+
+.assessmentBanner {
+  background: var(--primary-purple-light);
+  border: 1px solid var(--grey-200);
+  border-radius: var(--radius);
+  padding: 32px 40px;
+  margin-bottom: 48px;
+}
+
+.assessmentContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.assessmentText {
+  flex: 1;
+  min-width: 280px;
+}
+
+.assessmentTitle {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: var(--grey-600);
+  margin: 0 0 12px 0;
+}
+
+.assessmentDesc {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--grey-600);
+  margin: 0 0 24px 0;
+}
+
+.assessmentBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  background: var(--primary-purple);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.assessmentBtn:hover {
+  background: #4a1fc7;
+  transform: translateY(-1px);
+}
+
+.assessmentGraphic {
+  flex-shrink: 0;
+}
+
+.assessmentGraphic img {
+  max-width: 280px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.quickLinks {
+  margin-bottom: 48px;
+}
+
+.quickLinksTitle {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: var(--grey-600);
+  margin: 0 0 24px 0;
+}
+
+.quickLinksGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+.quickLinkCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  background: var(--white);
+  border: 1px solid var(--grey-200);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--grey-600);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quickLinkCard:hover {
+  border-color: var(--primary-purple);
+  box-shadow: var(--shadow-lg);
+}
+
+.quickLinkLogo {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.quickLinkLogo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.quickLinkName {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.articles {
+  margin-top: 32px;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--grey-200);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--grey-300);
+  box-shadow: var(--shadow-lg);
+}
+
+.cardTitle {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 32px;
+  color: var(--grey-600);
+  margin: 0 0 8px 0;
+}
+
+.cardDesc {
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--grey-600);
+  margin: 0 0 16px 0;
+}
+
+.cardLink {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--system-blue);
+  text-decoration: none;
+}
+
+.cardLink:hover {
+  text-decoration: underline;
+}
